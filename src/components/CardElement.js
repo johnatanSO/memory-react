@@ -1,11 +1,13 @@
 import React from 'react'
 
-function CardElement({card}) {
+function CardElement(props) {
+
+
   return (
-    <div id={card.id} className="card">
+    <div onClick={() => {props.onHandleFlip(props.card)}} id={props.card.id} className={`card ${props.card.flipped? "flip" : ""}`}>
       
         <div className="cardFront">
-          <img className="icon"src={`./assets/images/${card.icon}.png`} alt={card.icon}/>
+          <img className="icon"src={`./assets/images/${props.card.icon}.png`} alt={props.card.icon}/>
         </div>
         
         <div className="cardBack">

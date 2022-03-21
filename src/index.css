@@ -5,14 +5,16 @@
   font-family:'Righteous', sans-serif;
 }
 body{
+  background-color:rgb(198, 198, 198);
+}
+.memoryGame{
   display:flex;
-  justify-content: center;
   align-items: center;
-  flex-direction:column;
-  background-color:rgb(202, 202, 202);
+  flex-direction: column;
 }
 h1{
   background-color:rgb(255, 0, 55);
+  text-align: center;
   padding:2.5vh;
   margin:1vh;
   font-size: 3vh;

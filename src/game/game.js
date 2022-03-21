@@ -11,7 +11,7 @@ let game = {
     },
 
     setCard:function(id){
-        let card = cards.filter(card=>card.id===id)[0]
+        let card = this.cards.filter(card=>card.id===id)[0]
         if (card.flipped || this.lockMode){
             return false
         }
@@ -38,6 +38,16 @@ let game = {
         this.secondCard = null
         this.lockMode = false
     },
+    shuffleCards: function(cards){
+        let currentIndex = cards.length
+        let randomIndex = 0
+        while(currentIndex != 0){
+            randomIndex = Math.floor(Math.random()*currentIndex)
+            currentIndex--;
+    
+            [this.cards[randomIndex],this.cards[currentIndex]]=[this.cards[currentIndex], this.cards[randomIndex]]
+        }
+    },
 
     unflipCards: function(){
         this.firstCard.flipped = false
@@ -45,7 +55,7 @@ let game = {
         this.clearCards()
     },
     checkGameOver: function(){
-        return game.cards.filter(card=>!card.flipped).length == 0  
+        return this.cards.filter(card=>!card.flipped).length == 0  
     },
 
     tecs: [
@@ -66,7 +76,9 @@ let game = {
         this.tecs.map((tec)=>{
             this.cards.push(this.createPairFromTec(tec))
         })
-        return (this.cards.flatMap(pair => pair))
+        this.cards = this.cards.flatMap(pair => pair)
+        this.shuffleCards(this.cards)
+        return this.cards
     },
     
     createPairFromTec:function(tec){
@@ -85,3 +97,6 @@ let game = {
         return tec + parseInt(Math.random()*1000)
     },
 }
+
+
+export default game
